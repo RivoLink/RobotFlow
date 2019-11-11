@@ -14,4 +14,11 @@ class Drawable:
 	
 	def draw(self,screen):
 		screen.blit(self._image,self._rect)
+		
+	def scroll(self,screen):
+		if self.position.right>screen.get_width():
+			self.position.x-=1
+		else:
+			self.position.x=0
+		
 	

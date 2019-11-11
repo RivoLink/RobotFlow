@@ -25,6 +25,9 @@ class Game():
 		screen.fill(WHITE)
 		
 		self.ground.draw(screen)
+		self.ground.scroll(screen)
+		
 		self.robot.draw(screen)
+		self.robot.scroll(screen)
 		
 	

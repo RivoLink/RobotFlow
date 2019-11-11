@@ -19,6 +19,11 @@ class Player(Drawable):
 		if not self.isJumping:
 			self.isJumping=True
 			self.y0=self.position.y
+			
+	def scroll(self,screen):
+		if not self.isJumping and self.position.y==self.y0:
+			if self.position.left > 5:
+				self.position.x-=1
                     
 	def __jumping(self):
 		if self.step > -self.STEP+1:
