@@ -18,7 +18,7 @@ class Game():
 		self.robot.position.bottom=self.ground.position.top
 		
 	def input(self,event):
-		if(event.type==MOUSEBUTTONDOWN):
+		if event.type==MOUSEBUTTONDOWN:
 			self.robot.jump()
 	
 	def render(self,screen,delta):
