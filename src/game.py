@@ -1,33 +1,38 @@
-from const import  WORLD,WHITE
+from const import  RULER,HEIGHT,WIDTH,WORLD,WHITE
 from pygame.locals import MOUSEBUTTONDOWN
 
+from log import  Log
+from world import World
 from player import Player
 from drawable import  Drawable
 
 class Game():
 	
 	def __init__(self):
+		self.log=Log()
+		self.world=None
 		self.robot=None
-		self.ground=None
-	
-	def start(self,screen):
-		self.ground=Drawable('ground.png',WORLD)
-		self.ground.position.bottom=480 #screen.get_height()
 		
+	def start(self):
 		self.robot=Player('idle.png')
-		self.robot.position.bottom=self.ground.position.top
+		self.robot.position.bottom=RULER
+		
+		self.world=World(self.robot)
 		
 	def input(self,event):
 		if event.type==MOUSEBUTTONDOWN:
 			self.robot.jump()
 	
-	def render(self,screen,delta):
+	def render(self,screen):
 		screen.fill(WHITE)
 		
-		self.ground.draw(screen)
-		self.ground.scroll(screen)
-		
 		self.robot.draw(screen)
-		self.robot.scroll(screen)
+		self.robot.scroll(0,0)
 		
-	
+		self.world.draw(screen)
+		
+		self.log.set_action(str(self.robot.action))
+		self.log.set_stats(str(self.world.mask))
+		self.log.set_distance(str(self.world.distance))
+		self.log.draw(screen)
+		
